@@ -1,0 +1,161 @@
+{% extends 'AdminPanel/adminBase.html'%}
+{% load static %}
+{% block title %}
+Dashboard | Covid Wani
+{% endblock%}
+
+{% block body %}
+<div class="container ">
+    <div class="text-center display-6" style="margin-top:30px"><b>Welcome to Covid Wani Dashboard</b></div>
+    <hr>
+
+    {% if messages %}
+    {% for x in messages %}
+    <div class="container">
+        <div class="alert alert-{{x.tags}} alert-dismissible fade show" role="alert">
+            <strong>{{x}}</strong>
+            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+
+
+    <div class="mybody">
+        <div class="container my-5" style="color: white;
+background: #9796f0;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 3rem 2rem 4rem 2rem;
+  border-radius: 0 0 1rem 1rem;
+  min-height: 400px;
+  max-width: 700px;
+  ">
+            <style>
+    
+    .btn-grad {background-image: linear-gradient(to right, #1e3c72 0%, #2a5298  51%, #1e3c72  100%)}
+         .btn-grad {
+            margin: 10px 0px;
+            width: 7rem;
+            padding: 5px 1px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            border-radius: 5px;
+            display: block;
+          }
+
+    
+          .btn-grad2 {background-image: linear-gradient(to right, #0575E6 0%, #021B79  51%, #0575E6  100%)}
+         .btn-grad2 {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+          }
+
+
+
+
+
+            </style>
+          <form method="post">{% csrf_token %}
+            <div class="mb-3">
+            <label class="form-label" >Enter Your Phone Number</label>
+            <input class="form-control" {%if data%} {% for x in data%}value="{{x.phone}}"{% endfor%}{% endif%} placeholder="Phone Number" type="number" name="phone">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" >Enter Address</label>
+            <input class="form-control" {%if data%} {% for x in data%}value="{{x.address}}"{% endfor%}{% endif%}  placeholder="Enter hospital Address" type="text" name="address">
+        </div>
+
+
+            <h1 style="margin: 30px auto 40px auto;">Information on Beds</h1>
+
+
+                <div class="row g-3" style="margin-bottom: 30px; font-weight: 500;">
+                    <div class="col">
+                        <label>Available Beds without oxygen</label>
+                        <input aria-label="Last name" class="form-control" name="bwoo" type="number"  {%if data%} {% for x in data%} value="{{x.beds_without_oxygen}}" {% endfor%} {% endif%}>
+                    </div>
+                    <div class="col">
+
+                        <label>Total Beds without oxygen</label>
+                        <input aria-label="Last name" class="form-control" name="two" type="number" {%if data%} {% for x in data%} value="{{x.total_beds_without_oxygen}}"{% endfor %}{% endif%}>
+                    </div>
+                </div>
+
+                <div class="row g-3" style="margin-bottom: 30px; font-weight: 500;">
+                    <div class="col">
+                        <label>Available Beds with oxygen</label>
+                        <input aria-label="Last name" class="form-control" name="bwo" type="number" {%if data%} {% for x in data%} value="{{x.beds_with_oxygen}}" {% endfor%}{% endif %}>
+
+                    </div>
+                    <div class="col">
+                        <label>Total Beds with oxygen</label>
+                        <input aria-label="Last name" class="form-control" name="to" type="number" {%if data%} {% for x in data%} value="{{x.total_beds_with_oxygen}}" {% endfor %}{% endif%}>
+                    </div>
+                </div>
+
+                <div class="row g-3" style="margin-bottom: 30px; font-weight: 500;">
+                    <div class="col">
+                        <label>Available ICU without ventilator</label>
+                        <input aria-label="Last name" class="form-control" name="wov" type="number" {%if data%} {% for x in data%} value="{{x.normal_icu}}"{% endfor%}{% endif %}>
+
+                    </div>
+                    <div class="col">
+                        <label>Total ICU without ventilator</label>
+                        <input aria-label="Last name" class="form-control" name="twv" type="number" {%if data%} {% for x in data%} value="{{x.total_normal_icu}}" {% endfor %}{% endif %}>
+                    </div>
+                </div>
+
+                <div class="row g-3" style="margin-bottom: 30px; font-weight: 500;">
+                    <div class="col">
+                        <label>Available ICU with ventilator</label>
+                        <input aria-label="Last name" class="form-control" name="wv" type="number" {%if data%} {% for x in data%} value="{{x.icu_with_ventilator}}" {% endfor%}{%endif%}>
+                    </div>
+                    <div class="col">
+                        <label>Total ICU with ventilator</label>
+                        <input aria-label="Last name" class="form-control" name="tv" type="number" {%if data%} {% for x in data%} value="{{x.total_icu_with_ventilator}}" {% endfor%}{%endif%} >
+                    </div>
+                </div>
+                <center>
+
+                    {% if data%}
+                    <div class="container my-2">
+                        <button class="btn btn-grad2 btn-primary" type="submit">Update</button>
+                    </div>
+                    {% else %}
+                    <div class="container my-2">
+                        <button class="btn btn-grad2 btn-primary" type="submit"> Save data</button>
+                    </div>
+                    {% endif %}
+
+                </center>
+            </form>
+
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock  %}

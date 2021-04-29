@@ -1,0 +1,59 @@
+{% extends 'App/base2.html' %}
+{% block title%}Login | Covid Wani{% endblock %}
+
+{% block body %}
+
+<div class="container" style="margin: auto;">
+    <h1 style="text-align:center; margin-top: 2rem;">Login</h1>
+    <hr>
+    <div class="container1">
+        <!-- <img src="/App/static/App/undraw_medicine_b1ol.svg" > -->
+        <form method="post">{% csrf_token%}
+            <div class="mb-4">
+                <label class="form-label label1" for="formGroupExampleInput" style="color:#fff">User Name</label>
+                <input class="form-control control1" id="formGroupExampleInput" name="name" placeholder="" type="text">
+            </div>
+            <div class="mb-3">
+                <label class="form-label label1" for="formGroupExampleInput2"  style="color:#fff">Password</label>
+                <input class="form-control control1" id="formGroupExampleInput2" name="pass" placeholder="" type="password">
+            </div>
+            <div class="my-2">
+                <button class="btn btn-primary mybtn" style="display: flex; margin: auto;" type="submit">Log In</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<style>
+
+    .container1 {
+        margin: 1rem auto;
+        background: #0575E6;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #021B79, #0575E6);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #021B79, #0575E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        padding: 3rem;
+        border-radius: 0.5rem;
+        max-width: 600px;
+    }
+    .label1 {
+        max-width: 400px;
+        display: flex; margin: 0.5rem auto;
+    }
+    .control1 {
+        max-width: 400px;
+        display: flex; margin: 0.5rem auto;
+    }
+
+    .mybtn{
+    background-color: #4158D0;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+  }
+
+
+</style>
+
+
+{% endblock %}
